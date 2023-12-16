@@ -4,8 +4,6 @@ local player = {}
 
 local defaultWidth = 800
 local defaultHeight = 600
-local boundary = 20
-local playerSize = 30
 
 function player.load()
     player.x = defaultWidth / 2
@@ -41,16 +39,6 @@ function player.update(dt)
         local dx, dy = 0, 0
         
         -- Keyboard inputs
-        if love.keyboard.isDown("up") then
-            dy = dy - scaledSpeed
-            player.currentAnimation = player.animations.up
-            movementKeyPressed = true
-        end
-        if love.keyboard.isDown("down") then
-            dy = dy + scaledSpeed
-            player.currentAnimation = player.animations.down
-            movementKeyPressed = true
-        end
         if love.keyboard.isDown("left") then
             dx = dx - scaledSpeed
             player.currentAnimation = player.animations.left
@@ -59,6 +47,16 @@ function player.update(dt)
         if love.keyboard.isDown("right") then
             dx = dx + scaledSpeed
             player.currentAnimation = player.animations.right
+            movementKeyPressed = true
+        end
+        if love.keyboard.isDown("up") then
+            dy = dy - scaledSpeed
+            player.currentAnimation = player.animations.up
+            movementKeyPressed = true
+        end
+        if love.keyboard.isDown("down") then
+            dy = dy + scaledSpeed
+            player.currentAnimation = player.animations.down
             movementKeyPressed = true
         end
         
@@ -92,13 +90,13 @@ function player.update(dt)
 end
 
 function player.draw()
-    local desiredWidth = 60  -- Change this value to adjust the player's size
+    local desiredWidth = 40  -- Change this value to adjust the player's size
     local spriteWidth, spriteHeight = player.currentAnimation:getDimensions()
 
     local scaleX = desiredWidth / spriteWidth
     local scaleY = desiredWidth / spriteWidth  -- Maintain the aspect ratio for y-direction
 
-    player.currentAnimation:draw(player.spriteSheet, player.x, player.y, nil, scaleX, scaleY)
+    player.currentAnimation:draw(player.spriteSheet, player.x, player.y, nil, scaleX, scaleY, scaleX / 2, scaleY / 2)
 end
 
 return player
