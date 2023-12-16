@@ -68,17 +68,9 @@ function player.update(dt)
             dy = dy * 0.7071
         end
         
-        -- Apply boundaries
-        local newX = player.x + dx
-        local newY = player.y + dy
-
-        if newX > boundary and newX < defaultWidth - boundary - playerSize then
-            player.x = newX
-        end
-
-        if newY > boundary and newY < defaultHeight - boundary - playerSize then
-            player.y = newY
-        end
+        -- Remove the boundary checks
+        player.x = player.x + dx
+        player.y = player.y + dy
     else
         -- Unfreeze animation if movement keys are pressed
         if love.keyboard.isDown("up") or love.keyboard.isDown("down") or
