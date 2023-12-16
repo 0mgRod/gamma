@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <tileset>
+        <name>grass-01</name>
+        <id>1</id>
+        <image>tiles/grass-01.png</image>
+        <tile>
+            <name>grass-top</name>
+            <id>1</id>
+            <xpos>32</xpos>
+            <ypos>32</ypos>
+            <xsize>32</xsize>
+            <ysize>32</ysize>
+        </tile>
+        <tile>
+            <name>grass-side</name>
+            <id>2</id>
+            <xpos>0</xpos>
+            <ypos>0</ypos>
+            <xsize>32</xsize>
+            <ysize>32</ysize>
+        </tile>
+        <tile>
+            <name>path-top</name>
+            <id>3</id>
+            <xpos>32</xpos>
+            <ypos>0</ypos>
+            <xsize>32</xsize>
+            <ysize>32</ysize>
+        </tile>
+        <tile>
+            <name>path-side</name>
+            <id>4</id>
+            <xpos>0</xpos>
+            <ypos>32</ypos>
+            <xsize>32</xsize>
+            <ysize>32</ysize>
+        </tile>
+    </tileset>
+</xml>
