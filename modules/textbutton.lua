@@ -1,16 +1,14 @@
-local TextButton = {} -- Define the TextButton table
-TextButton.__index = TextButton -- Set the metatable to itself
+local TextButton = {}
 
-function TextButton:new(text, yPos, font, color)
-    local this = {
-        text = text,
-        yPos = yPos,
-        font = font,
-        color = color or {1, 1, 1, 1}, -- Default color is white with full opacity
-        selectedColor = {1, 1, 0, 0} -- Selected color is yellow with initial zero opacity
+function TextButton:new(text, action)
+    local button = {
+        text = text or "",
+        action = action or function() end,
+        selectedColor = {1, 1, 0, 0}, -- Default selected color (yellow)
+        visible = true
     }
-    setmetatable(this, self)
-    return this
+    setmetatable(button, { __index = TextButton })
+    return button
 end
 
-return TextButton -- Don't forget to return the TextButton table at the end
+return TextButton
