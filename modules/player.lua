@@ -6,8 +6,10 @@ local defaultWidth = 800
 local defaultHeight = 600
 
 function player.load()
-    player.x = defaultWidth / 2
-    player.y = defaultHeight / 2
+    -- Spawnpoint
+    player.x = 2176
+    player.y = 1632
+    -- Other player stuff
     player.speed = 3
     player.frozen = true
 
