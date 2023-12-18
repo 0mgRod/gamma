@@ -7,10 +7,12 @@ local defaultHeight = 600
 
 function player.load()
     -- Spawnpoint
-    player.x = 2176
-    player.y = 1632
+    player.x = 160
+    player.y = 672
+    player.collider = world:newBSGRectangleCollider(0, 0, 38, 55, 10)
+    player.collider:setFixedRotation(true)
     -- Other player stuff
-    player.speed = 3
+    player.speed = 300
     player.frozen = true
 
     player.spriteSheet = love.graphics.newImage('assets/player.png')
@@ -33,6 +35,10 @@ function player.load()
 end
 
 function player.update(dt)
+
+    local vx = 0
+    local vy = 0
+
     local scaledSpeed = player.speed * math.min(love.graphics.getWidth() / defaultWidth, love.graphics.getHeight() / defaultHeight)
     local movementKeyPressed = false
 
@@ -42,22 +48,22 @@ function player.update(dt)
         
         -- Keyboard inputs
         if love.keyboard.isDown("left") then
-            dx = dx - scaledSpeed
+            vx = scaledSpeed * -1
             player.currentAnimation = player.animations.left
             movementKeyPressed = true
         end
         if love.keyboard.isDown("right") then
-            dx = dx + scaledSpeed
+            vx = scaledSpeed
             player.currentAnimation = player.animations.right
             movementKeyPressed = true
         end
         if love.keyboard.isDown("up") then
-            dy = dy - scaledSpeed
+            vy = scaledSpeed * -1
             player.currentAnimation = player.animations.up
             movementKeyPressed = true
         end
         if love.keyboard.isDown("down") then
-            dy = dy + scaledSpeed
+            vy = scaledSpeed
             player.currentAnimation = player.animations.down
             movementKeyPressed = true
         end
@@ -71,6 +77,8 @@ function player.update(dt)
         -- Remove the boundary checks
         player.x = player.x + dx
         player.y = player.y + dy
+
+        player.collider:setLinearVelocity(vx, vy)
     else
         -- Unfreeze animation if movement keys are pressed
         if love.keyboard.isDown("up") or love.keyboard.isDown("down") or
@@ -89,6 +97,9 @@ function player.update(dt)
     end
     
     player.currentAnimation:update(dt)
+
+    player.x = player.collider:getX() - 40 / player.currentAnimation:getDimensions() * 8
+    player.y = player.collider:getY() - 40 / player.currentAnimation:getDimensions() * 14
 end
 
 function player.draw()

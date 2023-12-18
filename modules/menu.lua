@@ -18,8 +18,9 @@ function Menu:new()
     local menu = {
         buttons = {
             { text = "Play!", action = function() state = 1 player.frozen = false playerVisible = true end, selectedColor = {1, 1, 0, 0} },
-            { text = "Settings", action = function() print("Settings button pressed") end, selectedColor = {1, 1, 0, 0} },
+            -- { text = "Settings", action = function() print("Settings button pressed") end, selectedColor = {1, 1, 0, 0} },
             { text = "Credits", action = function() self:showCredits() end, selectedColor = {1, 1, 0, 0} },
+            { text = "Full Version Preview", action = function() print("nope.") end, selectedColor = {1, 1, 0, 0} },
             { text = "Quit", action = function() love.event.quit() end, selectedColor = {1, 1, 0, 0} }
         },
         selectedButton = 1,

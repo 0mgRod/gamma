@@ -3,6 +3,7 @@ local AspectRatio = require("libraries.aspectratio")
 local wait = require("libraries.wait")
 local camera = require("libraries.camera")
 local sti = require("libraries.sti")
+local wf = require("libraries.windfield")
 require("libraries.closegame")
 
 local player = require("modules.player") -- Import the player module
@@ -12,6 +13,8 @@ local TextButton = require("modules.textbutton")
 local GameManager = require("modules.gameManager")
 
 function love.load()
+    world = wf.newWorld(0, 0)
+
     cam = camera()
     
     gameMap = sti("maps/mainmap.lua")
@@ -25,6 +28,8 @@ end
 
 function love.update(dt)
     menu:update(dt)
+
+    world:update(dt)
 
     -- Update player using the player module if it's visible and the state is 1
     if GameManager.isPlayerVisible() and GameManager.getCurrentState() == 1 then
@@ -54,11 +59,21 @@ function love.update(dt)
     if cam.y > (mapH - h/2) then
         cam.y = (mapH - h/2)
     end
+
+    walls = {}
+    if gameMap.layers["WallColliders"] then
+        for i, obj in pairs(gameMap.layers["WallColliders"].objects) do
+            local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
+            wall:setType("static")
+            table.insert(walls, wall)
+        end
+    end
 end
 
 function love.draw()
         if state == 1 then
             cam:attach()
+                world:draw()
                 gameMap:drawLayer(gameMap.layers["Terrain"])
                 gameMap:drawLayer(gameMap.layers["Path"])
                 gameMap:drawLayer(gameMap.layers["Objects3"])
