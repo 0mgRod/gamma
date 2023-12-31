@@ -71,25 +71,26 @@ function love.update(dt)
 end
 
 function love.draw()
-        if state == 1 then
-            cam:attach()
-                world:draw()
-                gameMap:drawLayer(gameMap.layers["Terrain"])
-                gameMap:drawLayer(gameMap.layers["Path"])
-                gameMap:drawLayer(gameMap.layers["Objects3"])
-                gameMap:drawLayer(gameMap.layers["Objects4"])
-                if playerVisible then
-                    player.draw()
-                end
-                gameMap:drawLayer(gameMap.layers["Walls"])
-                gameMap:drawLayer(gameMap.layers["Walls2"])
-                gameMap:drawLayer(gameMap.layers["Objects1"])
-                gameMap:drawLayer(gameMap.layers["Objects2"])
-            cam:detach()
-        elseif not menu.hideMenu then
-            menu:draw()
-        end
+    if state == 1 then
+        cam:attach()
+            gameMap:drawLayer(gameMap.layers["Terrain"])
+            gameMap:drawLayer(gameMap.layers["Path"])
+            gameMap:drawLayer(gameMap.layers["Objects3"])
+            gameMap:drawLayer(gameMap.layers["Objects4"])
+            if playerVisible then
+                player.draw()
+            end
+            gameMap:drawLayer(gameMap.layers["Walls"])
+            gameMap:drawLayer(gameMap.layers["Walls2"])
+            gameMap:drawLayer(gameMap.layers["Objects1"])
+            gameMap:drawLayer(gameMap.layers["Objects2"])
+            world:draw()
+        cam:detach()
+    elseif not menu.hideMenu then
+        menu:draw()
+    end
 end
+
 
 function love.keypressed(key)
     menu:keypressed(key)

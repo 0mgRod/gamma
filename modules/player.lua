@@ -7,15 +7,15 @@ local defaultHeight = 600
 
 function player.load()
     -- Spawnpoint
-    player.x = 160
-    player.y = 672
-    player.collider = world:newBSGRectangleCollider(0, 0, 38, 55, 10)
+    player.x = 0
+    player.y = 0
+    player.collider = world:newBSGRectangleCollider(2176, 1632, 38, 55, 10)
     player.collider:setFixedRotation(true)
     -- Other player stuff
     player.speed = 300
     player.frozen = true
 
-    player.spriteSheet = love.graphics.newImage('assets/player.png')
+    player.spriteSheet = love.graphics.newImage('assets/images/player.png')
     player.spriteSheet:setFilter("nearest", "nearest")
     local frameWidth = 20
     local frameHeight = 30
