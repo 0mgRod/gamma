@@ -138,6 +138,7 @@ function Menu:createCreditsMenu()
         buttons = {
             { text = "Lead Developer - OmgRod", url = "https://github.com/0mgRod", selectedColor = {1, 1, 0, 0}, visible = true },
             { text = "LPC Tile Atlas - adrix89", url = "https://opengameart.org/content/lpc-tile-atlas", selectedColor = {1, 1, 0, 0}, visible = true },
+            { text = "Soundtrack - Kevin MacLeod", url = "https://incompetech.com/music/royalty-free/music.html", selectedColor = {1, 1, 0, 0}, visible = true },
             { text = "Back", action = function() currentState = MenuState.MAIN_MENU end, selectedColor = {1, 1, 0, 0}, visible = true },
         },
         selectedButton = 1,
