@@ -1,4 +1,3 @@
--- typewriter.lua
 local Typewriter = {}
 
 function Typewriter.new(text, x, y, delay)
@@ -29,20 +28,6 @@ function Typewriter.new(text, x, y, delay)
 
     function self:draw()
         love.graphics.print(self.displayedText, self.x, self.y)
-    end
-
-    return self
-end
-
-function Typewriter.cutscene(text, x, y, width, font)
-    local self = Typewriter.new(text, x, y, 0.1)
-
-    local font = font or love.graphics.newFont("fonts/pixel.ttf", 16)
-    love.graphics.setFont(font)
-
-    function self:draw()
-        love.graphics.setColor(1, 1, 1)  -- Set color to white
-        love.graphics.printf(self.displayedText, self.x, self.y, width or love.graphics.getWidth() * 0.75)
     end
 
     return self

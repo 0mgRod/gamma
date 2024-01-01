@@ -1,20 +1,41 @@
-local SaveFile = {} -- 1
+-- savefile.lua
+local SaveFile = {}
 
-function SaveFile.save(slot)
-    local filename = "saves/slot" .. slot .. ".csv" -- 2
-    -- Implement saving logic here
-    -- Open the file
-    -- Write game data to the file
-    -- Close the file
+function SaveFile:save(filename, data)
+    local success, message = love.filesystem.write(filename, data)
+    if success then
+        print("File saved successfully")
+    else
+        print("Failed to save file:", message)
+    end
 end
 
-function SaveFile.load(slot)
-    local filename = "saves/slot" .. slot .. ".csv" -- 3
-    -- Implement loading logic here
-    -- Open the file
-    -- Read game data from the file
-    -- Close the file
-    -- Return the loaded data
+function SaveFile:load(filename)
+    if love.filesystem.getInfo(filename) then
+        local data = love.filesystem.read(filename)
+        print("File loaded successfully")
+        return data
+    else
+        print("File not found:", filename)
+        return nil
+    end
 end
 
-return SaveFile -- 4
+function SaveFile:getSaveFiles()
+    local saveFiles = {}
+
+    for i = 1, 3 do
+        local filename = "savefile_" .. i .. ".txt"
+        if love.filesystem.getInfo(filename) then
+            table.insert(saveFiles, filename)
+        else
+            -- If file doesn't exist, create an empty one
+            self:save(filename, "")
+            table.insert(saveFiles, filename)
+        end
+    end
+
+    return saveFiles
+end
+
+return SaveFile

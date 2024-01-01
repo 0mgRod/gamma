@@ -60,14 +60,19 @@ function love.update(dt)
         cam.y = (mapH - h/2)
     end
 
+    local wallOffsetX = 2016 -- Adjust this value for horizontal offset
+    local wallOffsetY = 992 -- Adjust this value for vertical offset
+
     walls = {}
     if gameMap.layers["WallColliders"] then
         for i, obj in pairs(gameMap.layers["WallColliders"].objects) do
-            local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
-            wall:setType("static")
-            table.insert(walls, wall)
+          local x = obj.x + wallOffsetX
+          local y = obj.y + wallOffsetY
+          local wall = world:newRectangleCollider(x, y, obj.width, obj.height)
+          wall:setType("static")
+          table.insert(walls, wall)
         end
-    end
+      end
 end
 
 function love.draw()
@@ -81,15 +86,16 @@ function love.draw()
                 player.draw()
             end
             gameMap:drawLayer(gameMap.layers["Walls"])
-            gameMap:drawLayer(gameMap.layers["Walls2"])
+            gameMap:drawLayer(gameMap.layers["Walls2"])  -- Draw walls after the player
             gameMap:drawLayer(gameMap.layers["Objects1"])
             gameMap:drawLayer(gameMap.layers["Objects2"])
-            world:draw()
+            -- world:draw() -- Draws the hitboxes
         cam:detach()
     elseif not menu.hideMenu then
         menu:draw()
     end
 end
+
 
 
 function love.keypressed(key)
